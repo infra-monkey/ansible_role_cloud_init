@@ -1,0 +1,4 @@
+---
+cloud_init_interface_name: "eth0"
+cloud_init_enable_updates: false
+...

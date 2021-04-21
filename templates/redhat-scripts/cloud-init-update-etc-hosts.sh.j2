@@ -1,0 +1,12 @@
+#!/bin/sh
+
+localip4=$(ip address show dev {{ cloud_init_interface_name }} | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
+localip6=$(ip address show dev {{ cloud_init_interface_name }} | grep "inet6 " | awk '{print $2}' | cut -d"/" -f1)
+localhostname=$(hostname -s)
+localfqdn=$(hostname -f)
+
+# replace block :
+# cloud-init-runcmd-start
+# cloud-init-runcmd-end
+
+sed -i 's/#cloud-init-runcmd-start.*#cloud-init-runcmd-end/#cloud-init-runcmd-start\n${localip4} ${localfqdn} ${localhostname}\n${localip6} ${localfqdn} ${localhostname}#cloud-init-runcmd-end' /etc/hosts

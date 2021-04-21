@@ -1,0 +1,17 @@
+---
+- name: "Install required packages"
+  ansible.builtin.apt:
+    name: "{{ pkglist }}"
+    update_cache: true
+    autoremove: true
+    state: present
+
+- name: "Add /etc/hosts update script"
+  ansible.builtin.template:
+    src: "debian-scripts/cloud-init-update-etc-hosts.sh.j2"
+    dest: /usr/local/bin/cloud-init-update-etc-hosts.sh
+    owner: root
+    group: root
+    mode: '0755'
+  when: cloud_init_platform is defined
+...

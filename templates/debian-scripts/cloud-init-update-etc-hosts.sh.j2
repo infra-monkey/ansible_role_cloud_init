@@ -1,0 +1,6 @@
+#!/bin/sh
+
+localip4=$(ip address show dev {{ cloud_init_interface_name }} | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
+localip6=$(ip address show dev {{ cloud_init_interface_name }} | grep "inet6 " | awk '{print $2}' | cut -d"/" -f1)
+
+sed -i 's/127.0.1.1/${localip4}' /etc/hosts
