@@ -1,0 +1,18 @@
+---
+- name: "Include os specific variables"
+  include_vars: "vars-{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+- name: "Call configuration task for Debian like systems"
+  include_tasks: configure-Debian.yml
+  when: ansible_os_family == "Debian"
+- name: "Call configuration task for RedHat like systems"
+  include_tasks: configure-RedHat.yml
+  when: ansible_os_family == "RedHat"
+- name: "Add customisation file for the virtualization platform"
+  ansible.builtin.template:
+    src: "{{ cloud_init_platform }}-{{ ansible_os_family }}.cfg.j2"
+    dest: /etc/cloud/cloud.cfg.d/99-{{ cloud_init_platform }}.cfg
+    owner: root
+    group: root
+    mode: '0644'
+  when: cloud_init_platform is defined
+...

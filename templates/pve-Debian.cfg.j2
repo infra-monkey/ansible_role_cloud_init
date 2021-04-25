@@ -1,0 +1,5 @@
+package_update: {{ cloud_init_enable_updates }}
+package_upgrade: {{ cloud_init_enable_updates }}
+datasource_list: [ NoCloud, ConfigDrive ]
+runcmd:
+  - /usr/local/bin/cloud-init-update-etc-hosts.sh

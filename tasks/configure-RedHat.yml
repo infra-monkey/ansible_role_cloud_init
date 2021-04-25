@@ -1,0 +1,23 @@
+---
+- name: "Install required packages"
+  ansible.builtin.package:
+    name: "{{ pkglist }}"
+    state: present
+
+- name: Change file ownership, group and permissions
+  ansible.builtin.copy:
+    src: redhat-templates/hosts.redhat.tmpl
+    dest: /etc/cloud/templates/hosts.redhat.tmpl
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: "Add /etc/hosts update script"
+  ansible.builtin.template:
+    src: "redhat-scripts/cloud-init-update-etc-hosts.sh.j2"
+    dest: /usr/local/bin/cloud-init-update-etc-hosts.sh
+    owner: root
+    group: root
+    mode: '0755'
+  when: cloud_init_platform is defined
+...
