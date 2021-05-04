@@ -9,4 +9,4 @@ localfqdn=$(hostname -f)
 # cloud-init-runcmd-start
 # cloud-init-runcmd-end
 
-sed -i 's/#cloud-init-runcmd-start.*#cloud-init-runcmd-end/#cloud-init-runcmd-start\n${localip4} ${localfqdn} ${localhostname}\n${localip6} ${localfqdn} ${localhostname}#cloud-init-runcmd-end' /etc/hosts
+sed -i "s/#cloud-init-runcmd-start.\*#cloud-init-runcmd-end/#cloud-init-runcmd-start\n${localip4} ${localfqdn} ${localhostname}\n${localip6} ${localfqdn} ${localhostname}#cloud-init-runcmd-end/" /etc/hosts
