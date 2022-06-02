@@ -1,5 +1,6 @@
 #cloud-config
 package_upgrade: {{ cloud_init_enable_updates }}
+manage_resolv_conf: {{ cloud_init_manage_resolv_conf }}
 datasource_list: [ NoCloud, ConfigDrive ]
 runcmd:
   - /usr/local/bin/cloud-init-update-etc-hosts.sh
