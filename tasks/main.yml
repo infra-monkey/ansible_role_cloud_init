@@ -1,11 +1,11 @@
 ---
 - name: "Include os specific variables"
-  include_vars: "vars-{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+  ansible.builtin.include_vars: "vars-{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
 - name: "Call configuration task for Debian like systems"
-  include_tasks: configure-Debian.yml
+  ansible.builtin.include_tasks: configure-Debian.yml
   when: ansible_os_family == "Debian"
 - name: "Call configuration task for RedHat like systems"
-  include_tasks: configure-RedHat.yml
+  ansible.builtin.include_tasks: configure-RedHat.yml
   when: ansible_os_family == "RedHat"
 - name: "Add customisation file for the virtualization platform"
   ansible.builtin.template:
