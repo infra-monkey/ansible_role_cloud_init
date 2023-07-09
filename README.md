@@ -31,7 +31,7 @@ Platforms supported in the future:
 This role is tested using Molecule against:
 - Python 3.7, 3.8 and 3.9
 - CentOS 7/8/9
-- Debian 9/10/11
+- Debian 9/10/11/12
 
 # Help
 
